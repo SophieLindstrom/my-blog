@@ -12,8 +12,9 @@ export default function PostRoute() {
 
   return (
     <>
-      <h2>Ett blogginlägg</h2>
-      <Link to="/">Tillbaka</Link>
+      <Link className="header-back-to" to="/">
+        Tillbaka
+      </Link>
 
       <Post post={post}></Post>
     </>

@@ -1,38 +1,135 @@
-.App {
+*,
+html,
+body {
+  box-sizing: border-box;
+  font-family: Roboto Mono;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: bold;
   text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
+  background: white;
+  height: 150px;
+  padding: 10px;
+  font-size: x-large;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.header-logo {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.header-letter {
+  height: 100%;
+}
+
+.page-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.post-image {
+  width: 100%;
+}
+
+.header-box.header-box-logo {
+  height: 100%;
+}
+
+.header-box:last-of-type {
+  text-align: right;
+}
+.header-box.menu {
+  font-size: x-large;
+  text-align: right;
+  display: flex;
+  gap: 38px;
+  padding-right: 40px;
+}
+
+.menu a {
+  color: black;
+}
+.post-title {
+  text-align: center;
+  font-weight: normal;
+  font-size: 21px;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+a.post-title-link {
+  color: black;
+}
+
+.post-title-link.post-title-link-post {
+  text-decoration: none;
+}
+
+.post-author {
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+}
+.header-back-to {
+  color: red;
+}
+.main-container {
+  height: 100%;
+}
+
+.blog-post.blog-post-front-item {
+  margin-bottom: 70px;
+}
+.front-posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+.post-image {
+  aspect-ratio: 16/9;
+  background-size: cover;
+}
+.search-box {
+  background-color: rgb(235 236 240);
+  border-radius: 100px;
+  padding: 20px 35px;
+  border: 0px;
+  width: 100%;
+  font-size: 20px;
+  padding-left: 60px;
+}
+
+.search-box:focus {
+  background-color: black;
   color: white;
+  border: 0;
+  outline: none;
+}
+.search-box-wrapper {
+  margin-bottom: 28px;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-icon {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
 }
