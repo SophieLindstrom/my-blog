@@ -1,12 +1,5 @@
 import { Link } from "react-router-dom";
-
-export interface PostModel {
-  id: number;
-  title: string;
-  author: string;
-  img?: string;
-  text: String;
-}
+import { PostModel } from "./Post";
 
 interface PostProps {
   post: PostModel;
@@ -23,7 +16,7 @@ export default function FrontPostItem({ post }: PostProps) {
         <img
           className="post-image"
           onClick={clickPicture}
-          src={post.img}
+          src={post.image}
           alt=""
         />
         <Link className="post-title-link" to={`/post/${post.id}`}>

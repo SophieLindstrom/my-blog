@@ -6,6 +6,7 @@ import LinksRoute from "../routes/LinksRoute";
 import PostRoute from "../routes/PostRoute";
 import ProjectsRoute from "../routes/ProjectsRoute";
 import AdminRoute from "../routes/AdminRoute";
+import CreatePostRoute from "../routes/CreatePostRoute";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -36,6 +37,12 @@ export default function AppRouter() {
         {
           path: "/admin",
           element: <AdminRoute />,
+          children: [
+            {
+              path: "/admin/createpost",
+              element: <CreatePostRoute />,
+            },
+          ],
         },
       ],
     },

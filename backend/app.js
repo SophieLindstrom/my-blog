@@ -11,12 +11,15 @@ app.use((req, res, next) => {
 });
 const sqlite3 = require('sqlite3').verbose();
 // Skapa en anslutning till databasen
-const db = new sqlite3.Database('./db/database.db', (err) => {
+const db = new sqlite3.Database('./db/SophieDatabase.db', (err) => {
   if (err) {
     console.error(err.message);
-  }
-  console.log('Connected to the database.');
+  }else{console.log('Connected to the database.');}
+  
 });
+
+
+console.log(db);
 
 const port = process.env.PORT || 4000;
 
@@ -24,53 +27,57 @@ app.get('/', (req, res) =>{
   res.send('Hello from praktikanterna');
 });
 
-app.get('/hello', function(req, res){
+app.get('/posts', function(req, res){
   console.log(req.query);
   res.setHeader('Content-Type', 'application/json');
 
-  const greeting = `Hej gästanvändare, och välkommen till Apendo!`;
+  db.all("SELECT * FROM blogposts LIMIT 10", function(err, rows) {  
+    if (err) {
+      console.error(err.message);
+    }
 
-  res.send(JSON.stringify({ message: greeting }));
+      res.send(JSON.stringify(rows));
+  });
 });
 
-app.post('/hello', function(req, res){
+app.get('/post/:id', function(req, res){
+  console.log(req.params.id);
+
+  const id = req.params.id;
+
+  res.setHeader('Content-Type', 'application/json');
+
+  db.get("SELECT * FROM blogposts WHERE id = ? LIMIT 1", [id], function(err, row) {  
+    if (err) {
+      console.error(err.message);
+    }
+
+      res.send(JSON.stringify(row));
+  });
+});
+
+app.post('/addpost', function(req, res){
   console.log(req.body);
-  const firstName =  req.body.firstName;
-  const lastName = req.body.lastName;
+  const title =  req.body.title;
+  const author = req.body.author;
+  const image = req.body.image;
+  const text = req.body.text;
   res.setHeader('Content-Type', 'application/json');
 
 
-  db.run("INSERT INTO Register(firstName, lastName) VALUES (?,?)",[firstName, lastName], function (err) {
+  db.run("INSERT INTO blogposts (author, title, image, text) VALUES (?,?,?,?)",[author, title, image, text], function (err) {
 
-    const greeting = `Hej ${firstName} ${lastName}, och välkommen till Apendo!`;
+    // const greeting = `Det här är min titel: ${title}`;
 
-    res.send(JSON.stringify({ message: greeting, userId: this.lastID }));
+    console.log("här är mitt id", this.lastID);
+
+     res.send(JSON.stringify({ id: this.lastID }));
 
     if (err) {
       console.error(err.message);
     } 
   });
 });
-
-app.put('/hello', function(req, res){
-  console.log(req.body);
-  const userId = req.body.userId;
-  const firstName =  req.body.firstName;
-  const lastName = req.body.lastName;
-  res.setHeader('Content-Type', 'application/json');
-
-  db.run("UPDATE Register SET firstName = ?, lastName = ? WHERE id = ?",[firstName, lastName, userId], function (err) {
-    if (err) {
-      console.error(err.message);
-    } 
-  });
-  
-
-  const greeting = `Hej ${firstName} ${lastName}! Du har nu ändrat dina uppgifter, välkommen till Apendo!`;
-
-  res.send(JSON.stringify({ message: greeting }));
-});
-
 
 app.listen(port, () =>
   console.log(`Server ts running on port ${port}, http://localhost:${port}`)

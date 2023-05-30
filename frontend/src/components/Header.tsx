@@ -23,6 +23,9 @@ export default function Header() {
         <div>
           <Link to="/projects">PROJECTS</Link>
         </div>
+        <div>
+          <Link to="/admin">ADMIN</Link>
+        </div>
       </div>
     </div>
   );

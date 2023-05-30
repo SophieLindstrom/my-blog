@@ -1,11 +1,15 @@
 import { IconButton, InputAdornment, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FrontPostItem from "../components/FrontPostItem";
 import { PostModel } from "../components/Post";
-import { posts } from "../data/posts";
 import SearchIcon from "@mui/icons-material/Search";
+import axios from "axios";
 
-const filterArticles = (posts: PostModel[], searchText: string) => {
+const filterArticles = (posts: PostModel[] | null, searchText: string) => {
+  if (!posts) {
+    return [];
+  }
+
   if (searchText.length === 0) {
     return posts;
   }
@@ -17,7 +21,35 @@ const filterArticles = (posts: PostModel[], searchText: string) => {
 
 export default function HomeRoute() {
   const [searchText, setSearchText] = useState("");
+
+  const [posts, setPosts] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const foundArticles = filterArticles(posts, searchText);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/posts`);
+
+        setPosts(response.data);
+
+        setError(null);
+      } catch (err) {
+        setError((err as unknown as any).message);
+        setPosts(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getPosts();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>

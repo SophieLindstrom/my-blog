@@ -5,7 +5,15 @@ export interface PostModel {
   id: number;
   title: string;
   author: string;
-  img?: string;
+  image?: string;
+  text: String;
+}
+
+export interface PostModelDataImport {
+  id?: number;
+  title: string;
+  author: string;
+  image?: string;
   text: String;
 }
 
@@ -31,7 +39,7 @@ export default function Post({ post }: PostProps) {
         <img
           className="post-image"
           onClick={clickPicture}
-          src={post.img}
+          src={post.image}
           alt=""
         />
         <h3 className="post-author">Författare: {post.author}</h3>
