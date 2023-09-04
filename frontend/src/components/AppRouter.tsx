@@ -6,7 +6,11 @@ import LinksRoute from "../routes/LinksRoute";
 import PostRoute from "../routes/PostRoute";
 import ProjectsRoute from "../routes/ProjectsRoute";
 import AdminRoute from "../routes/AdminRoute";
-import CreatePostRoute from "../routes/CreatePostRoute";
+import CreatePostRoute from "../routes/AdminCreatePostsRoute";
+import AdminPostsRoute from "../routes/AdminPostsRoute";
+import AdminCreatePostsRoute from "../routes/AdminCreatePostsRoute";
+import AdminListPostsRoute from "../routes/AdminListPostsRoute";
+import AdminEditPostsRoute from "../routes/AdminEditPostsRoute";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -39,8 +43,22 @@ export default function AppRouter() {
           element: <AdminRoute />,
           children: [
             {
-              path: "/admin/createpost",
-              element: <CreatePostRoute />,
+              path: "/admin/posts",
+              element: <AdminPostsRoute />,
+              children: [
+                {
+                  path: "/admin/posts/create",
+                  element: <AdminCreatePostsRoute />,
+                },
+                {
+                  path: "/admin/posts/list",
+                  element: <AdminListPostsRoute />,
+                },
+                {
+                  path: "/admin/posts/edit/:id",
+                  element: <AdminEditPostsRoute />,
+                },
+              ],
             },
           ],
         },

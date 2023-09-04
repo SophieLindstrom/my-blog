@@ -6,15 +6,14 @@ export interface PostModel {
   title: string;
   author: string;
   image?: string;
-  text: String;
+  text: string;
 }
 
 export interface PostModelDataImport {
-  id?: number;
   title: string;
   author: string;
   image?: string;
-  text: String;
+  text: string;
 }
 
 interface PostProps {
