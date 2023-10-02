@@ -53,6 +53,7 @@ export default function HomeRoute() {
 
   return (
     <>
+    
       <h2>Här kan man skriva ett blogginlägg</h2>
       <div className="search-box-wrapper">
         <div className="search-icon">
@@ -72,6 +73,7 @@ export default function HomeRoute() {
           <FrontPostItem key={index} post={item}></FrontPostItem>
         ))}
       </div>
+      
     </>
   );
 }

@@ -35,12 +35,12 @@ export default function Post({ post }: PostProps) {
           <h1 className="post-title">{post.title}</h1>
         </Link>
 
-        <img
-          className="post-image"
+        <div
+          className="overflow-hidden w-full aspect-video"
           onClick={clickPicture}
-          src={post.image}
-          alt=""
-        />
+        >
+          <img className="object-cover w-full" src={post.image} />
+        </div>
         <h3 className="post-author">Författare: {post.author}</h3>
         <div className="post-content">{post.text}</div>
         <div>

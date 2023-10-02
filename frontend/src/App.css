@@ -28,19 +28,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-.header {
-  background: white;
-  height: 150px;
-  padding: 10px;
-  font-size: x-large;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .header-logo {
   height: 100%;
   border-radius: 10px;
@@ -58,6 +45,9 @@ h2 {
 
 .post-image {
   width: 100%;
+  aspect-ratio: 16/12;
+  background-size: cover;
+  background-position: center center;
 }
 
 .header-box.header-box-logo {
@@ -75,26 +65,6 @@ h2 {
   padding-right: 40px;
 }
 
-.menu a {
-  color: black;
-}
-.post-title {
-  text-align: center;
-  font-weight: normal;
-  font-size: 21px;
-  display: block;
-  width: 50%;
-  margin: 0 auto;
-  margin-bottom: 10px;
-}
-a.post-title-link {
-  color: black;
-}
-
-.post-title-link.post-title-link-post {
-  text-decoration: none;
-}
-
 .post-author {
   text-align: center;
   font-weight: bold;
@@ -103,21 +73,11 @@ a.post-title-link {
 .header-back-to {
   color: red;
 }
-.main-container {
-  height: 100%;
-}
 
-.blog-post.blog-post-front-item {
-  margin-bottom: 70px;
-}
 .front-posts {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
-}
-.post-image {
-  aspect-ratio: 16/9;
-  background-size: cover;
 }
 .search-box {
   background-color: rgb(235 236 240);

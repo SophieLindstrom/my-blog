@@ -106,6 +106,21 @@ app.post("/editpost", function (req, res) {
   );
 });
 
+app.delete("/deletepost/:id", function (req, res) {
+  const id = req.params.id;
+
+  if (!id) {
+    res.send(JSON.stringify({ error: "Error" }));
+  }
+
+  db.run("DELETE FROM blogposts WHERE id=?", [id], function (err) {
+    res.send(JSON.stringify({ id: id }));
+    if (err) {
+      console.log(err.message);
+    }
+  });
+});
+
 app.listen(port, () =>
   console.log(`Server ts running on port ${port}, http://localhost:${port}`)
 );

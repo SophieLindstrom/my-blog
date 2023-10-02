@@ -6,23 +6,21 @@ interface PostProps {
 }
 
 export default function FrontPostItem({ post }: PostProps) {
-  const clickPicture = () => {
-    alert("You have clicked");
-  };
-
   return (
     <>
-      <div className="blog-post blog-post-front-item">
-        <img
-          className="post-image"
-          onClick={clickPicture}
-          src={post.image}
-          alt=""
-        />
-        <Link className="post-title-link" to={`/post/${post.id}`}>
-          <h1 className="post-title">{post.title}</h1>
-        </Link>
-      </div>
+      <Link
+        className="group bg-slate-300 hover:bg-emerald-200 p-2 dark:hover:bg-emerald-800"
+        to={`/post/${post.id}`}
+      >
+        <div className="blog-post blog-post-front-item">
+          <div className="overflow-hidden w-full aspect-video">
+            <img className="object-cover w-full" src={post.image} />
+          </div>
+          <h1 className="group-hover:text-purple-500 text-center p-4 text-lg block">
+            {post.title}
+          </h1>
+        </div>
+      </Link>
     </>
   );
 }

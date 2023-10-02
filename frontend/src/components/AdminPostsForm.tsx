@@ -4,6 +4,7 @@ import React from "react";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { PostModel, PostModelDataImport } from "./Post";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPostsForm({ post }: { post?: PostModel }) {
   const [title, setTitle] = useState(post?.title ?? "");
@@ -15,6 +16,7 @@ export default function AdminPostsForm({ post }: { post?: PostModel }) {
   const [titleError, setTitleError] = useState(false);
   const [authorError, setauthorError] = useState(false);
   const [textError, settextError] = useState(false);
+  const navigate = useNavigate();
 
   // Deklarera en funktion som körs när användaren klickar på "Submit"-knappen
 
@@ -43,7 +45,7 @@ export default function AdminPostsForm({ post }: { post?: PostModel }) {
     if (!titleError || !authorError || !textError) {
       let res;
       if (post?.id) {
-        res = await axios.post<PostModel>("http://localhost:4000/editpost", {
+        res = await axios.post("http://localhost:4000/editpost", {
           id: post?.id,
           title,
           author,
@@ -63,7 +65,13 @@ export default function AdminPostsForm({ post }: { post?: PostModel }) {
       }
 
       if (res) {
-        setShowMessage(true);
+        const id = res.data.id;
+        console.log(res);
+
+        if (id) {
+          const url = `/post/${id}`;
+          navigate(url);
+        }
       }
     }
 
@@ -111,6 +119,7 @@ export default function AdminPostsForm({ post }: { post?: PostModel }) {
         <textarea
           value={text}
           className="bg-slate-300 border-2 w-full border-black rounded p-4"
+          placeholder="Skriv ditt inlägg"
           onChange={(event) => setText(event.target.value)}
         ></textarea>
         {textError && (
@@ -124,10 +133,8 @@ export default function AdminPostsForm({ post }: { post?: PostModel }) {
           type="submit"
           disabled={isSaving}
         >
-          Posta
+          {post?.id ? "Uppdatera" : "Posta"}
         </button>
-        {showMessage && !post?.id && <div>Nu har du postat ett inlägg!</div>}
-        {showMessage && post?.id && <div>Nu har du uppdaterat ett inlägg!</div>}
       </div>
     </form>
   );
